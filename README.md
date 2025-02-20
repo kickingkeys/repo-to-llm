@@ -8,7 +8,7 @@
 
 </div>
 
-A Python tool that intelligently converts GitHub repositories into LLM-optimized summaries, extracting key structural information while minimizing token usage. Perfect for sharing codebases with AI assistants.
+A Python tool that converts GitHub repositories into LLM-optimized summaries, extracting key structural information while minimizing token usage. Perfect for sharing codebases with AI assistants.
 
 ## ✨ Features
 
@@ -230,6 +230,4 @@ python3 repo_to_llm.py
 
 ---
 
-<div align="center">
-Made with ❤️ for more efficient LLM interactions
-</div>
+
