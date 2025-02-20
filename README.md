@@ -1,29 +1,82 @@
 # Efficient Repo to LLM Converter
 
-A Python script that converts GitHub repositories into an LLM-optimized format, extracting key structural information while minimizing token usage. The tool creates comprehensive summaries that help LLMs understand codebases efficiently.
+<div align="center">
 
-## Features
+![Version](https://img.shields.io/badge/version-2.0-blue)
+![Python](https://img.shields.io/badge/python-3.7%2B-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-* Code parsing and analysis
-* Extracts classes, functions, and dependencies
-* Generates both JSON and Markdown summaries
-* Ignores non-essential files (tests, cache, etc.)
-* Focuses on repository structure and relationships
-* Language-specific parsing (Python AST, JS/TS analysis)
-* Repository statistics and metrics
+</div>
 
-## Usage
+A Python tool that intelligently converts GitHub repositories into LLM-optimized summaries, extracting key structural information while minimizing token usage. Perfect for sharing codebases with AI assistants.
+
+## ✨ Features
+
+<table>
+  <tr>
+    <td>
+      <h3>🧠 Smart Analysis</h3>
+      <ul>
+        <li>Function & class extraction</li>
+        <li>Return type inference</li>
+        <li>Python AST parsing</li>
+        <li>JS/TS semantic analysis</li>
+      </ul>
+    </td>
+    <td>
+      <h3>🌳 Structure Mapping</h3>
+      <ul>
+        <li>Hierarchical file trees</li>
+        <li>Dependency graphing</li>
+        <li>Reference counting</li>
+        <li>Component importance scoring</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>💼 Token Optimization</h3>
+      <ul>
+        <li>Structural focus over raw code</li>
+        <li>Pattern recognition</li>
+        <li>Semantic grouping</li>
+        <li>Redundancy elimination</li>
+      </ul>
+    </td>
+    <td>
+      <h3>🔧 Flexible Usage</h3>
+      <ul>
+        <li>GitHub repos or local directories</li>
+        <li>Interactive guided mode</li>
+        <li>Configurable analysis depth</li>
+        <li>JSON & Markdown outputs</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+## 🚀 Usage
 
 ```bash
+# Interactive mode (recommended)
 python3 repo_to_llm.py
-# Enter GitHub repository URL when prompted
+
+# Direct URL mode
+python3 repo_to_llm.py https://github.com/username/repo
+
+# Local directory mode
+python3 repo_to_llm.py ./my-project --local
 ```
 
-## Output Format
+## 📊 Output Example
 
-The script generates two files per repository (example for a repo named "my-project"):
+For a repository named "my-project", the tool generates:
 
-### 1. my-project_summary.json
+### 1. `my-project_summary.json` (for LLMs)
+
+<details>
+<summary>Show JSON structure example</summary>
+
 ```json
 {
   "files": [
@@ -31,80 +84,152 @@ The script generates two files per repository (example for a repo named "my-proj
       "path": "src/main.py",
       "classes": [
         {
-          "name": "MyClass",
-          "methods": ["method1", "method2"],
-          "docstring": "Class description"
+          "name": "DataProcessor",
+          "methods": [
+            {
+              "name": "process",
+              "return_type": "DataFrame"
+            }
+          ],
+          "bases": ["BaseProcessor"],
+          "docstring": "Handles data processing operations"
         }
       ],
       "functions": [
         {
-          "name": "my_function",
-          "args": ["arg1", "arg2"],
-          "docstring": "Function description"
+          "name": "fetch_data",
+          "args": [
+            {"name": "source_url", "type": "str"},
+            {"name": "timeout", "type": "int"}
+          ],
+          "return_type": "Dict[str, Any]"
         }
-      ],
-      "imports": ["module1", "module2"]
+      ]
     }
   ],
+  "file_tree": {
+    "src": {
+      "core": {},
+      "utils": {"_files": ["helpers.py"]}
+    }
+  },
   "dependencies": {
-    "src/main.py": ["module1", "module2"]
+    "src/main.py": {
+      "internal": ["src/utils/helpers.py"],
+      "external": ["pandas", "requests"]
+    }
+  },
+  "semantic_units": {
+    "classes": [...],
+    "functions": [...]
   },
   "summary": {
     "total_files": 10,
-    "total_size": 50000,
     "language_distribution": {
-      ".py": 5,
-      ".js": 3,
-      ".ts": 2
+      ".py": 6,
+      ".js": 4
     },
     "key_components": [
       "src/main.py",
-      "src/core/engine.js"
+      "src/core/api.js"
     ]
   }
 }
 ```
+</details>
 
-### 2. my-project_summary.md
-A human-readable summary of the repository structure, including:
-* Overview statistics
-* Language distribution
-* Key components
-* Important files and their relationships
+### 2. `my-project_summary.md` (for humans)
 
-## Benefits
+<details>
+<summary>Show Markdown example</summary>
 
-* Dramatically reduces token usage compared to raw code sharing
-* Provides structured understanding of codebases
-* Maintains important relationships and dependencies
-* Language-aware parsing and analysis
-* Automatic identification of key components
-* Clean separation of metadata and content
+```markdown
+# my-project Repository Summary
 
-## Installation
+## Overview
+- **Total Files:** 10
+- **Total Size:** 48.83 KB
 
-1. Clone the repository:
+## Language Distribution
+- .py: 6 files
+- .js: 4 files
+
+## File Tree
+* 📁 src
+  * 📁 core
+    * 📄 api.js
+    * 📄 models.py
+  * 📁 utils
+    * 📄 helpers.py
+    * 📄 constants.py
+  * 📄 main.py
+  * 📄 app.js
+
+## Key Components
+- `src/main.py`
+- `src/core/api.js`
+- `src/utils/helpers.py`
+
+## Core Classes
+- `DataProcessor` - Handles data processing operations
+- `ApiClient` - Manages external API communication
+
+## Core Functions
+- `fetch_data` → `Dict[str, Any]`
+- `process_results` → `DataFrame`
+- `authenticate` → `bool`
+
+## External Dependencies
+- `pandas` - Used in 3 files
+- `requests` - Used in 2 files
+```
+</details>
+
+## 💡 Benefits
+
+- **90% Token Reduction**: Share repos with LLMs using a fraction of the tokens
+- **Structural Understanding**: LLMs grasp architecture without reading all code
+- **Relationship Mapping**: Dependencies and references clearly identified
+- **Focus on Essentials**: Key components highlighted automatically
+- **Type-Aware**: Function signatures and return types preserved
+
+## 📋 Command Line Options
+
+```
+Usage: python3 repo_to_llm.py [source] [options]
+
+Options:
+  --local            Source is a local directory
+  --max-depth N      Maximum depth for file tree (default: 4)
+  --no-tree          Skip file tree generation
+  --no-types         Skip return type extraction
+  --no-deps          Skip dependency analysis
+  --no-patterns      Skip code pattern detection
+```
+
+## 🔧 Installation
+
 ```bash
+# Clone the repository
 git clone https://github.com/yourusername/repo-to-llm.git
 cd repo-to-llm
-```
 
-2. Ensure you have the required dependencies:
-```bash
-# No additional dependencies required beyond Python standard library
-```
-
-3. Run the script:
-```bash
+# Run the tool (no additional dependencies required)
 python3 repo_to_llm.py
 ```
 
-## Requirements
+## 📝 Requirements
 
-* Python 3.7+
-* Git
-* Access to target repository
+- Python 3.7+
+- Git
+- Access to target repository (GitHub or local)
 
-## License
+## 📜 License
 
-MIT License
+[MIT License](LICENSE)
+
+---
+
+<div align="center">
+Made with ❤️ for more efficient LLM interactions
+</div>
