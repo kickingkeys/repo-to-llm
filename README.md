@@ -1,12 +1,5 @@
 # Efficient Repo to LLM Converter
 
-<div align="center">
-
-![Version](https://img.shields.io/badge/version-2.0-blue)
-![Python](https://img.shields.io/badge/python-3.7%2B-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-green)
-
-</div>
 
 A Python tool that converts GitHub repositories into LLM-optimized summaries, extracting key structural information while minimizing token usage. Perfect for sharing codebases with AI assistants.
 
